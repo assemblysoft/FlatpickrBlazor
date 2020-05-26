@@ -19,7 +19,8 @@ namespace FlatpickrBlazor
             public string AltFormat { get; set; } = "F Y";
 
             [JsonPropertyName("theme")]
-            public string Theme { get; set; } = "light";
+            public string Theme { get; set; } = "light";            
+
         }
 
         // set to a instance to use the monthSelectPlugin

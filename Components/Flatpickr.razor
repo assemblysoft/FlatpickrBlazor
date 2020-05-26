@@ -43,7 +43,13 @@
     public Action<List<DateTimeOffset>> OnChange { get; set; } = null;
 
     [Parameter]
+    public Func<DateTime,string> OnCreateDate { get; set; } = null;
+
+    [Parameter]
     public Action OnCreate { get; set; } = null;
+
+    [Parameter]
+    public Func<DateTime,bool> DateAvailable { get; set; } = null;
 
     [Parameter]
     public string CustomInputId { get; set; }
@@ -157,7 +163,7 @@
 
     protected override void OnParametersSet()
     {
-        jsHelper = new FlatpickrJsHelper(OnChange, OnCreate);
+        jsHelper = new FlatpickrJsHelper(OnChange, OnCreate, OnCreateDate, DateAvailable);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
