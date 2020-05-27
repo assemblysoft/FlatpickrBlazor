@@ -43,6 +43,9 @@
     public Action<List<DateTimeOffset>> OnChange { get; set; } = null;
 
     [Parameter]
+    public Action<object[]> OnChangeRaw { get; set; } = null;
+
+    [Parameter]
     public Func<DateTime,string> OnCreateDate { get; set; } = null;
 
     [Parameter]

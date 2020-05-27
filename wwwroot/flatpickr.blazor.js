@@ -2,6 +2,9 @@
     create: function (element, options, pluginOptions, dotNetHelper) {
         element = this.__getElement(element);
         var opts = JSON.parse(options);
+
+        console.log(opts);
+
         var plugOpts = JSON.parse(pluginOptions);
         opts.plugins = [];
 
@@ -10,24 +13,11 @@
         }
         
         opts.onChange = function (selectedDates, dateStr, instance) {
+
             return dotNetHelper.invokeMethodAsync("OnChange", selectedDates);
         };
-
-        opts.disable = [
-            function (date) {
-
-                var disabled = false;
-
-                var promise = dotNetHelper.invokeMethodAsync("DateAvailable", date);
-                Promise.resolve(promise).then(function (value) {
-                    var val = !value;
-                    console.log(date + " :" + val);
-                    return val;
-                }) 
-                
-                return disabled;
-            }
-        ]
+    
+        
 
         opts.onDayCreate = function (dObj, dStr, fp, dayElem) {
             // Utilize dayElem.dateObj, which is the corresponding Date
@@ -56,6 +46,29 @@
         if (opts.minDate !== null && opts.minDate !== undefined && opts.parseMinDate === true) {
             opts.minDate = new Date(opts.minDate);
         }
+
+        opts.disable = [
+            function (date) {               
+
+                console.log("looking at opts.disable date " + date);
+
+                var result = dotNetHelper.invokeMethod("DateAvailable", date);
+
+                if (typeof result === "boolean") {
+                    result = !result;
+                    console.log("opts.disable date " + date + " : " + result);
+                    return result;
+                }
+                else {
+                    console.log("we have a problem with the return type");
+                }         
+                
+            }
+        ];
+
+        console.log(opts);
+
+        flatpickr.localize(flatpickr.l10ns.default);
         flatpickr(element, opts);
 
         return dotNetHelper.invokeMethodAsync("OnCreate");

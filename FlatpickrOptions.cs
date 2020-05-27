@@ -11,7 +11,7 @@ namespace FlatpickrBlazor
         /// </summary>
         /// <see href="https://flatpickr.js.org/formatting/"/>
         [JsonPropertyName("dateFormat")]
-        public string DateFormat { get; set; } = "Y-m-d";
+        public string DateFormat { get; set; } = "d-m-Y";
 
         /// <summary>
         /// Displays the calendar inline.
@@ -44,7 +44,7 @@ namespace FlatpickrBlazor
         public bool WeekNumbers { get; set; } = false;
 
         [JsonPropertyName("locale")]
-        public string Locale { get; set; } = "en";
+        public string Locale { get; set; } = "default";
 
         /// <summary>
         /// The minimum date that a user can start picking from (inclusive).
