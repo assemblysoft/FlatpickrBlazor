@@ -13,12 +13,19 @@ namespace FlatpickrBlazor
         private readonly Func<DateTime,string> _onCreateDate;
         private readonly Func<DateTime, bool> _available;
 
-        public FlatpickrJsHelper(Action<List<DateTimeOffset>> onChange, Action onCreate,Func<DateTime, string> onCreateDate, Func<DateTime,bool>available)
-        {          
+        public FlatpickrJsHelper(Action<List<DateTimeOffset>> onChange, Action onCreate,Func<DateTime, string> onCreateDate=null, Func<DateTime,bool>available=null)
+        {     
+            
             _onChange = onChange;
+
+            
             _onCreate = onCreate;
-            _onCreateDate = onCreateDate;
-            _available = available;
+            
+           if(onCreateDate != null) 
+                _onCreateDate = onCreateDate;
+            
+            if(available != null)
+                _available = available;
         }
         public List<DateTimeOffset> DateTimes { get; set; }
                   
@@ -44,9 +51,14 @@ namespace FlatpickrBlazor
 
         [JSInvokable]
         public bool DateAvailable(DateTime dt)
-        {            
+        {
+            //if (dt < DateTime.Now.AddDays(-4))
+            //{
+            //    return false;
+            //}            
+
             bool res = _available.Invoke(dt.ToLocalTime());
-            Console.WriteLine(dt.ToLocalTime() + "return val" + res);
+            //Console.WriteLine(dt.ToLocalTime() + "return val" + res);
             return res;
         }        
     }

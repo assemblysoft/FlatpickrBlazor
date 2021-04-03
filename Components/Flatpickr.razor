@@ -3,6 +3,7 @@
 @using System.Text.Json.Serialization
 @using FlatpickrBlazor
 @inject IJSRuntime JSRuntime
+
 @implements IFlatpickrOptions
 
 @if (String.IsNullOrWhiteSpace(CustomInputId))
@@ -23,6 +24,9 @@
 @code {
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> Attributes { get; set; }
+
+    [Parameter]
+    public string Identifier { get; set; } 
 
     [Parameter]
     public string WrapperCssClass { get; set; }

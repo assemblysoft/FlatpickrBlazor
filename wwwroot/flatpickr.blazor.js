@@ -3,7 +3,7 @@
         element = this.__getElement(element);
         var opts = JSON.parse(options);
 
-        console.log(opts);
+        //console.log(opts);
 
         var plugOpts = JSON.parse(pluginOptions);
         opts.plugins = [];
@@ -50,13 +50,13 @@
         opts.disable = [
             function (date) {               
 
-                console.log("looking at opts.disable date " + date);
+                //console.log("looking at opts.disable date " + date);
 
                 var result = dotNetHelper.invokeMethod("DateAvailable", date);
 
                 if (typeof result === "boolean") {
                     result = !result;
-                    console.log("opts.disable date " + date + " : " + result);
+                    //console.log("opts.disable date " + date + " : " + result);
                     return result;
                 }
                 else {
@@ -66,7 +66,7 @@
             }
         ];
 
-        console.log(opts);
+        //console.log(opts);
 
         flatpickr.localize(flatpickr.l10ns.default);
         flatpickr(element, opts);
